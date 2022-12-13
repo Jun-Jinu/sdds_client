@@ -925,38 +925,6 @@ export const layoutManager = {
                     alert("주문이 완료되었습니다.");
                     location.href="index.html";
 
-                    const countElement = document.getElementById('product-count');
-                    let count = countElement.value;
-
-                    const addressElement = document.getElementById('address_kakao');
-                    const detailAddressElement = document.getElementById('detail-address');
-                    let address = addressElement.value + " " + detailAddressElement.value;
-                    
-                    // const telElement = document.getElementById('order-tel');
-                    // let tel = telElement.value;
-                    
-                    let order = fetch(serverUrl + "/api/v1/orders/", {
-                        method: "POST",
-                        headers: {
-                            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2xvZ2luX2lkIjoidGVzdDEyMzQiLCJpYXQiOjE2NjgzNjM2NTcsImV4cCI6MTY3MDk1NTY1N30.nEl8jXeuwa1qog0JxeaoXxxOO6vy3_q8Pj6aTMiOJ7Y",
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            "count": count,
-                            "shipping_address": address,
-                            "etc": "Unknown Type: any",
-                            "website_url": website_url,
-                            "product_id": product_id,
-                            "user_id":  userId,
-                            //유져 아이디도 주소 파라미터로 받아야??
-                        }),
-                    })
-                    .then((response) => response.json())
-                    .then((data) => console.log(data))
-                    .then(() => alert("상품 주문이 완료되었습니다."))
-                    .catch((err) => console.log(err));
-                    //주문 성공 모달 띄울지?
-                    //그냥 확인 취소 뜨는 창 뜨는거 하면 될듯
 
                     console.log(count + " address: " + address + "tel: " + tel);
                 }
