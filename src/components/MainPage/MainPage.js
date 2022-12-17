@@ -33,6 +33,7 @@ import gjs_img_editor from "grapesjs-tui-image-editor"; //이미지 수정 가�
 import gjs_bg_custom from "grapesjs-style-bg";
 import gjs_pj_manager from "grapesjs-project-manager";
 import gjs_tail from "grapesjs-tailwind";
+import "grapesjs/dist/css/grapes.min.css";
 import { useRecoilValue } from "recoil";
 import { tokenState } from "../../recoil/Recoil";
 
@@ -215,153 +216,8 @@ function MainPage() {
         });
 
         // 설정 추가 예시
-        editor.DomComponents.addType("button", {
-            //isComponent: (el) => el.tagName == "11",
-            model: {
-                defaults: {
-                    traits: [
-                        // Strings are automatically converted to text types
-                        //"name", // Same as:
-                        { type: "text", name: "버튼 이름" },
-                        //"placeholder",
-                        {
-                            type: "select", // Type of the trait
-                            label: "클릭시", // The label you will see in Settings
-                            name: "onclick", // The name of the attribute/property to use on component
-                            options: [
-                                {
-                                    id: "location.href='./index.html'",
-                                    name: "페이지 1으로 이동",
-                                },
-                                {
-                                    id: "location.href='./index2.html'",
-                                    name: "페이지 2으로 이동",
-                                },
-                                {
-                                    id: "location.href='./index3.html'",
-                                    name: "페이지 3으로 이동",
-                                },
-                                {
-                                    id: "location.href='./index4.html'",
-                                    name: "페이지 4으로 이동",
-                                },
 
-                                // 이거 css도 적용하기
-                            ],
-                        },
-                        {
-                            type: "select",
-                            label: "버튼 꾸미기",
-                            name: "class",
-                            options: [
-                                {
-                                    id: "",
-                                    name: "버튼 디자인을 선택해주세요!",
-                                },
-                                {
-                                    id: "btn-order1",
-                                    name: "프리셋 1",
-                                },
-                                {
-                                    id: "btn-order2",
-                                    name: "프리셋 2",
-                                },
-                                {
-                                    id: "btn-order3",
-                                    name: "프리셋 3",
-                                },
-
-                                // 이거 css도 적용하기
-                            ],
-                        },
-                        {
-                            type: "checkbox",
-                            label: "사용 불가능하게",
-                            name: "disabled",
-                        },
-                        // {
-                        //     type: "button",
-                        //     // ...
-                        //     text: "Click me",
-                        //     full: true, // Full width button
-                        //     command: (editor) => alert("Hello"),
-                        //     // or you can just specify the Command ID
-                        //     // command: "some-command",
-                        // },
-                    ],
-                    // As by default, traits are binded to attributes, so to define
-                    // their initial value we can use attributes
-                    attributes: { type: "text", required: true },
-                },
-            },
-        });
-
-        // const cmp = editor.DomComponents;
-        // const eded = cmp.getWrapper().find("products-container")[0];
-        // const test = eded.get("components");
-        // test.removable = false;
-
-        // const component = editor.DomComponents.getWrapper().find(
-        //     ".products-container"
-        // )[0];
-        // component.set({ removable: false });
-
-        // component.components(`<div>Add some content inside</div>`);
-
-        // editor.TraitManager.addType("href-next", {
-        //     // Expects as return a simple HTML string or an HTML element
-        //     createInput({ trait }) {
-        //         // Here we can decide to use properties from the trait
-        //         const traitOpts = trait.get("options") || [];
-        //         const options = traitOpts.length
-        //             ? traitOpts
-        //             : [
-        //                   { id: "url", name: "URL" },
-        //                   { id: "email", name: "Email" },
-        //               ];
-
-        //         // Create a new element container and add some content
-        //         const el = document.createElement("div");
-        //         el.innerHTML = `
-        //         <select class="href-next__type">
-        //           ${options
-        //               .map(
-        //                   (opt) =>
-        //                       `<option value="${opt.id}">${opt.name}</option>`
-        //               )
-        //               .join("")}
-        //         </select>
-        //         <div class="href-next__url-inputs">
-        //           <input class="href-next__url" placeholder="Insert URL"/>
-        //         </div>
-        //         <div class="href-next__email-inputs">
-        //           <input class="href-next__email" placeholder="Insert email"/>
-        //           <input class="href-next__email-subject" placeholder="Insert subject"/>
-        //         </div>
-        //       `;
-
-        //         // Let's make our content interactive
-        //         const inputsUrl = el.querySelector(".href-next__url-inputs");
-        //         const inputsEmail = el.querySelector(
-        //             ".href-next__email-inputs"
-        //         );
-        //         const inputType = el.querySelector(".href-next__type");
-        //         inputType.addEventListener("change", (ev) => {
-        //             switch (ev.target.value) {
-        //                 case "url":
-        //                     inputsUrl.style.display = "";
-        //                     inputsEmail.style.display = "none";
-        //                     break;
-        //                 case "email":
-        //                     inputsUrl.style.display = "none";
-        //                     inputsEmail.style.display = "";
-        //                     break;
-        //             }
-        //         });
-
-        //         return el;
-        //     },
-        // });
+        editor.runCommand("get-tailwindCss");
 
         // editor.DomComponents.addType("link", {
         //     model: {
@@ -652,26 +508,7 @@ function MainPage() {
         //         content:
         //             '<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"></script><textarea name="editor1"></textarea>',
         //     },
-        // }); //스크립트 코드를 만드는 곳에 넣으려면 이걸 쓰면 됨
-
-        // editor.BlockManager.add("test-block2", {
-        //     label: "Test block2",
-        //     attributes: { class: "fa fa-text" },
-        //     content: {
-        //         script: "alert('alert 추가 테스트');",
-        //         content:
-        //             '<textarea name="editor1"></textarea><script>alert("avl 시험보세요");</script>',
-        //     },
-        // }); //스크립트 코드를 바로 실행하려면 이걸 쓰면 됨
-
-        //ajax 코드 예시
-        // $.ajax({
-        //     url: "",
-        //     type: "post",
-        //     data: { domain: domain },
-        //     success: function (data) {},
-        //     error: function (err) {},
-        // });
+        // }); //스크립트 삽입 예
 
         setEditor(editor);
     }, []);

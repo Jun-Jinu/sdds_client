@@ -341,4 +341,85 @@ export const addCommands = (editor, domain, page_id, page_count, token) => {
     //         console.log("testtes");
     //     },
     // });
+
+    editor.DomComponents.addType("button", {
+        //isComponent: (el) => el.tagName == "11",
+        model: {
+            defaults: {
+                traits: [
+                    // Strings are automatically converted to text types
+                    //"name", // Same as:
+                    { type: "text", name: "버튼 이름" },
+                    //"placeholder",
+                    {
+                        type: "select", // Type of the trait
+                        label: "클릭시", // The label you will see in Settings
+                        name: "onclick", // The name of the attribute/property to use on component
+                        options: [
+                            {
+                                id: "location.href='./index.html'",
+                                name: "페이지 1으로 이동",
+                            },
+                            {
+                                id: "location.href='./index2.html'",
+                                name: "페이지 2으로 이동",
+                            },
+                            {
+                                id: "location.href='./index3.html'",
+                                name: "페이지 3으로 이동",
+                            },
+                            {
+                                id: "location.href='./index4.html'",
+                                name: "페이지 4으로 이동",
+                            },
+
+                            // 이거 css도 적용하기
+                        ],
+                    },
+                    {
+                        type: "select",
+                        label: "버튼 꾸미기",
+                        name: "class",
+                        options: [
+                            {
+                                id: "",
+                                name: "버튼 디자인을 선택해주세요!",
+                            },
+                            {
+                                id: "btn-order1",
+                                name: "프리셋 1",
+                            },
+                            {
+                                id: "btn-order2",
+                                name: "프리셋 2",
+                            },
+                            {
+                                id: "btn-order3",
+                                name: "프리셋 3",
+                            },
+
+                            // 이거 css도 적용하기
+                        ],
+                    },
+                    {
+                        type: "checkbox",
+                        label: "사용 불가능하게",
+                        name: "disabled",
+                    },
+                    // {
+                    //     type: "button",
+                    //     // ...
+                    //     text: "Click me",
+                    //     full: true, // Full width button
+                    //     command: (editor) => alert("Hello"),
+                    //     // or you can just specify the Command ID
+                    //     // command: "some-command",
+                    // },
+                ],
+                // As by default, traits are binded to attributes, so to define
+                // their initial value we can use attributes
+                attributes: { type: "text", required: true },
+            },
+        },
+    });
 };
