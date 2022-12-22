@@ -329,6 +329,16 @@ function MainPage() {
                                                 class: "pannel-domain-modal",
                                             },
                                         });
+
+                                        editor.Modal.onceClose(() => {
+                                            addCommands(
+                                                editor,
+                                                domain,
+                                                page_id,
+                                                page_count,
+                                                token
+                                            );
+                                        });
                                     } else {
                                         addCommands(
                                             editor,
@@ -493,6 +503,34 @@ function MainPage() {
                                         attributes: {
                                             class: "pannel-pages-modal",
                                         },
+                                    });
+                                    editor.Modal.onceClose(() => {
+                                        const newPageId = page_content.value;
+
+                                        if (
+                                            newPageId >= 1 &&
+                                            newPageId <= page_count
+                                        ) {
+                                            const pageManager = editor.Pages;
+
+                                            if (page_id === "0") {
+                                                let newPage = pageManager.get(
+                                                    "page-" + page_content.value
+                                                );
+                                                pageManager.select(newPage);
+
+                                                alert(
+                                                    page_content.value +
+                                                        " 페이지로 변경되었습니다."
+                                                );
+                                            } else {
+                                                const newPage = pageManager.get(
+                                                    "layout-page-" +
+                                                        page_content.value
+                                                );
+                                                pageManager.select(newPage);
+                                            }
+                                        }
                                     });
                                 }
                             });
